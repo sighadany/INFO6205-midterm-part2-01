@@ -153,10 +153,50 @@ public class MinPQ<Key> implements Iterable<Key> {
 
     private void swim(int k) {
         //STUDENT TODO
+        int i = k;
+        int p = parentIndex(i);
+
+        while( i >= 1 ) {
+
+            if( p >= 1 && greater(i, i++)) {
+                i++;
+            }
+
+            if( p >= 1 && greater(p, i) ) {
+                exch(i, p);
+            } else {
+                return;
+            }
+
+            i =  p;
+        }
     }
 
     private void sink(int k) {
         //STUDENT TODO
+        int i = k;
+
+        int c = childIndex(k);
+
+        while( c < this.n ) {
+
+            if( c < this.n && greater(c, i) ) {
+                exch(c, i);
+            } else {
+                return;
+            }
+
+            i = c;
+        }
+
+    }
+
+    private int parentIndex(int k){
+        return k / 2 - 1;
+    }
+
+    private int childIndex(int k){
+        return 2 * k - 1;
     }
 
    /***************************************************************************
